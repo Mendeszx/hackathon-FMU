@@ -1,3 +1,22 @@
+<?php
+
+    if(isset($_POST['submit'])){
+
+        include('config.php');
+
+        $nome = $_POST['nome'];
+        $ra = $_POST['ra'];
+        $email = $_POST['email'];
+        $telefone = $_POST['telefone'];
+        $data_reserva = $_POST['data_reserva'];
+        $curso = $_POST['curso'];
+        
+        $result = mysqli_query($conexao, "INSERT INTO usuarios(nome,ra,email,telefone,data_reserva,curso) 
+        VALUES ('$nome','$ra','$email','$telefone','$data_reserva','$curso')");
+
+    }
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -86,7 +105,7 @@
 </head>
 <body>
     <div class="box">
-        <form action="">
+        <form action="index.php" method="POST">
             <fieldset>
                 <legend><b>Formulário de Alunos</b></legend>
                 <br>
@@ -95,7 +114,7 @@
                 </div>
                 <br><br>
                 <div class="inputbox">
-                    <input type="text" name="nome" id="nome" class="inputUser" required placeholder="RA">
+                    <input type="text" name="ra" id="ra" class="inputUser" required placeholder="RA">
                 </div>
                 <br><br>
                 <div class="inputbox">
@@ -106,11 +125,11 @@
                     <input type="tel" name="telefone" id="telefone" class="inputUser" required placeholder="Telefone de contato">
                 </div>
                 <br><br>
-                <label for="data_nascimento"><b>Data para reserva:</b></label>
-                <input type="date" name="data_nascimento" id="data_nascimento" required>
+                <label for="data_reserva"><b>Data para reserva:</b></label>
+                <input type="date" name="data_reserva" id="data_reserva" required>
                 <br><br><br>
                 <div class="inputbox">
-                    <input type="text" name="endereco" id="endereco" class="inputUser" required placeholder="Curso">
+                    <input type="text" name="curso" id="curso" class="inputUser" required placeholder="Curso">
                 </div>
                 <br><br>
                 <input type="submit" name="submit" id="submit">
