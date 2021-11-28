@@ -5,14 +5,24 @@
         include('config.php');
 
         $nome = $_POST['nome'];
-        $ra = $_POST['ra'];
+        $ra = intval($_POST['ra']);
         $email = $_POST['email'];
         $telefone = $_POST['telefone'];
         $data_reserva = $_POST['data_reserva'];
         $curso = $_POST['curso'];
         
-        $result = mysqli_query($conexao, "INSERT INTO usuarios(nome,ra,email,telefone,data_reserva,curso) 
-        VALUES ('$nome','$ra','$email','$telefone','$data_reserva','$curso')");
+        $stmt = $pdo->prepare("INSERT INTO usuarios(nome, ra, email, telefone, data_reserva,curso) 
+        VALUES(:nome, :ra, :email, :telefone, :data, :curso)");
+
+        $stmt->bindParam(":nome", $nome);
+        $stmt->bindParam(":ra", $ra);
+        $stmt->bindParam(":email", $email);
+        $stmt->bindParam(":telefone", $telefone);
+        $stmt->bindParam(":data", $data_reserva);
+        $stmt->bindParam(":curso", $curso);
+
+        $stmt->execute();
+        
 
     }
 
@@ -28,6 +38,13 @@
         body{
             font-family: Arial, Arial, Helvetica, sans-serif;
             background-color: Silver;
+        }
+        input[type=number]::-webkit-inner-spin-button { 
+            -webkit-appearance: none;
+        }
+        input[type=number] { 
+            -moz-appearance: textfield;
+            appearance: textfield;
         }
         .box{
             color: white;
@@ -114,7 +131,7 @@
                 </div>
                 <br><br>
                 <div class="inputbox">
-                    <input type="text" name="ra" id="ra" class="inputUser" required placeholder="RA">
+                    <input type="number" name="ra" id="ra" class="inputUser" required placeholder="RA">
                 </div>
                 <br><br>
                 <div class="inputbox">

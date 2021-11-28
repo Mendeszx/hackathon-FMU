@@ -4,12 +4,6 @@
     $dbPassword = "mendes1212";
     $dbname = "fmu";
 
-    $conexao = new mysqli($dbHost,$dbUsername,$dbPassword,$dbname);
-
-    if($conexao->connect_errno){
-        echo "Erro";
-    }else{
-        echo "Conexão efetuada com sucesso";
-    }
+    $pdo = new PDO("mysql:host={$dbHost};port=3306;dbname={$dbname};user={$dbUsername};password={$dbPassword}");
 
 ?>
